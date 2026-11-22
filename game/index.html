@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Meridian Midnight — The Cobalt Star Heist</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #0c0f16;
+    color: #e8ecf4;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  header {
+    width: 960px;
+    max-width: 100vw;
+    padding: 10px 4px 6px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #ffd94a;
+  }
+  header span { font-size: 13px; color: #9aa6bd; }
+  #hud {
+    width: 960px;
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px;
+  }
+  #alarm-wrap {
+    flex: 1 1 320px;
+    height: 22px;
+    background: #1a2030;
+    border: 1px solid #3a4358;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  #alarm-fill {
+    height: 100%;
+    width: 0%;
+    background: #3ddc84;
+    transition: width 0.12s linear;
+  }
+  #alarm-text {
+    position: absolute;
+    left: 8px;
+    top: 2px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #3ddc84;
+  }
+  #time {
+    font-size: 15px;
+    font-weight: bold;
+    min-width: 52px;
+    text-align: right;
+  }
+  #tools { font-size: 13px; color: #c8d2e4; white-space: nowrap; }
+  #objective {
+    width: 960px;
+    max-width: 100vw;
+    padding: 2px 4px 8px;
+    font-size: 14px;
+    color: #ffd94a;
+  }
+  #stage { position: relative; width: 960px; max-width: 100vw; }
+  canvas {
+    display: block;
+    width: 960px;
+    max-width: 100vw;
+    height: auto;
+    background: #1d2436;
+    border: 2px solid #3a4358;
+    cursor: crosshair;
+  }
+  #overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(8, 10, 16, 0.82);
+    padding: 24px;
+  }
+  #overlay.hidden { display: none; }
+  #overlay-title {
+    margin: 0 0 12px;
+    font-size: 34px;
+    letter-spacing: 4px;
+    color: #ffd94a;
+  }
+  #overlay-body {
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: #dfe6f2;
+    margin: 0 0 14px;
+  }
+  #overlay-hint { font-size: 13px; color: #9aa6bd; }
+  footer {
+    width: 960px;
+    max-width: 100vw;
+    padding: 8px 4px 16px;
+    font-size: 12px;
+    color: #7c879e;
+  }
+  footer b { color: #c8d2e4; }
+</style>
+</head>
+<body>
+<header>
+  <h1>MERIDIAN MIDNIGHT</h1>
+  <span>The Cobalt Star Heist — a one-room stealth game</span>
+</header>
+<div id="hud">
+  <div id="alarm-wrap"><div id="alarm-fill"></div><span id="alarm-text">ALARM 0%</span></div>
+  <span id="tools">Decoys (Q): 2&nbsp;&nbsp; EMP (E): 1</span>
+  <span id="time">0:00</span>
+</div>
+<div id="objective">Steal The Cobalt Star, then escape.</div>
+<div id="stage">
+  <canvas id="game" width="960" height="640"></canvas>
+  <div id="overlay">
+    <h2 id="overlay-title">MERIDIAN MIDNIGHT</h2>
+    <p id="overlay-body"></p>
+    <p id="overlay-hint"></p>
+  </div>
+</div>
+<footer>
+  <b>WASD / arrows</b> move &nbsp;·&nbsp; <b>Click</b> walk to a spot &nbsp;·&nbsp;
+  <b>Q</b> throw a decoy coin (lures nearby guards) &nbsp;·&nbsp;
+  <b>E</b> fire the EMP (blinds cameras 6s) &nbsp;·&nbsp;
+  <b>R</b> restart after a win or a capture. Hide behind plinths and planters — cover breaks line of sight.
+</footer>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
